@@ -1,3 +1,379 @@
-<html>
-  <p>Dicks look here</p>
-</html>
+
+  <p>Dicks live here.</p>
+<input checked='true' id='box_box' type='checkbox'>
+  <label for='box'>
+    <div class='container'>
+      <div class='toDo'>
+        <div class='toDo__header'>
+          <input autocomplete='off' id='listName' placeholder='Give your list a name' type='text' value=''>
+          <h1></h1>
+        </div>
+        <div class='toDo__content'></div>
+        <div class='toDo__footer'>
+          <input autocomplete='off' id='toDo' placeholder='Add a todo' type='text'>
+        </div>
+        <div class='btn-container'>
+          <a class='btn--save save'>Save List</a>
+          <a class='btn--loadList loadList'>Load List</a>
+          <a class='btn--delete delete'>New List</a>
+        </div>
+      </div>
+    </div>
+  </label>
+</input>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-transition: all .45s;
+  transition: all .45s;
+  font-family: 'Nunito', sans-serif;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+html, body {
+  background: #EDF2F4;
+  overflow-x: hidden;
+}
+
+.container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  -webkit-perspective: 1200;
+          perspective: 1200;
+}
+
+input[type='checkbox'] {
+  margin: 2em;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+input[type='checkbox']:before {
+  content: 'Enable 3D View';
+  display: block;
+  margin: 0 2em;
+  width: 100vw;
+  color: #3A405A;
+  font-size: 0.9em;
+}
+
+input[type='checkbox']:checked + label > .container > .toDo {
+  -webkit-transform: rotateX(30deg) rotateY(0deg) rotateZ(-30deg);
+          transform: rotateX(30deg) rotateY(0deg) rotateZ(-30deg);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+input[type='checkbox']:checked + label > .container > .toDo:hover {
+  -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+          transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.toDo {
+  background: #FFF;
+  width: 22em;
+  height: 30em;
+  box-shadow: 1px 0px 25px #cddbe1;
+  border-radius: 3px;
+}
+.toDo .btn, .toDo .btn--save, .toDo .btn--loadList, .toDo .btn--delete {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #FFF;
+  font-weight: 400;
+  font-size: 0.85em;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.toDo .btn-container {
+  margin: -6.7em 2.2em;
+}
+.toDo .btn--save {
+  background: #58A4B0;
+}
+.toDo .btn--loadList {
+  background: #E8C547;
+}
+.toDo .btn--delete {
+  background: #E56399;
+}
+.toDo .btn:hover, .toDo .btn--save:hover, .toDo .btn--loadList:hover, .toDo .btn--delete:hover {
+  opacity: 1;
+}
+.toDo__header {
+  background: #3A405A;
+  padding: 1em;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.toDo__header h1 {
+  color: #FAF9F9;
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.4em;
+}
+.toDo__header input[type="text"] {
+  background: transparent;
+  font-size: 0.9em;
+  font-weight: 300;
+  width: 100%;
+  padding: 0 1.3em;
+  text-align: center;
+  border: none;
+  outline: none;
+  color: #FFF;
+}
+.toDo__header ::-webkit-input-placeholder {
+  color: #FFF;
+}
+.toDo__header :-moz-placeholder {
+  color: #FFF;
+}
+.toDo__header ::-moz-placeholder {
+  color: #FFF;
+}
+.toDo__header :-ms-input-placeholder {
+  color: #FFF;
+}
+.toDo__content {
+  height: 20em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-bottom: 2em solid #FFF;
+}
+.toDo__content h2 {
+  color: #CCC;
+  font-weight: 300;
+  text-align: center;
+  margin: 35% auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 9em;
+  position: absolute;
+}
+.toDo__list-item {
+  background: #f3f7f8;
+  height: 4.5em;
+  width: 100%;
+  padding: 1.5em;
+  opacity: 0;
+  vertical-align: middle;
+}
+.toDo__list-item p {
+  color: #707aa3;
+  font-size: 0.75em;
+  letter-spacing: 0.015em;
+  float: left;
+  width: 17em;
+  font-weight: 400;
+  margin: 0 auto;
+  text-transform: capitalize;
+}
+.toDo__list-item:nth-of-type(odd) {
+  background: #e7edf0;
+}
+.toDo__list-item i {
+  color: #8f97b7;
+  float: right;
+  cursor: pointer;
+  vertical-align: middle;
+  outline: none;
+}
+.toDo__list-item i:hover {
+  color: #586189;
+}
+.toDo__footer {
+  border-top: 1px solid #EEE;
+}
+.toDo__footer input[type="text"] {
+  background: transparent;
+  font-size: 1em;
+  font-weight: 300;
+  width: 100%;
+  height: 6em;
+  padding: 0 1.3em;
+  text-align: left;
+  border: none;
+  outline: none;
+  color: #999;
+}
+
+.shake {
+  -webkit-animation: shake 2s linear;
+          animation: shake 2s linear;
+}
+
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translateX(0px) skew(0deg);
+            transform: translateX(0px) skew(0deg);
+  }
+  5% {
+    -webkit-transform: translateX(5px) skew(30deg);
+            transform: translateX(5px) skew(30deg);
+  }
+  10% {
+    -webkit-transform: translateX(10px) skew(0deg);
+            transform: translateX(10px) skew(0deg);
+  }
+  15% {
+    -webkit-transform: translateX(5px) skew(30deg);
+            transform: translateX(5px) skew(30deg);
+  }
+  20% {
+    -webkit-transform: translateX(10px) skew(0deg);
+            transform: translateX(10px) skew(0deg);
+  }
+  25% {
+    -webkit-transform: translateX(5px) skew(30deg);
+            transform: translateX(5px) skew(30deg);
+  }
+  25% {
+    -webkit-transform: translateX(0px) skew(0deg);
+            transform: translateX(0px) skew(0deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translateX(0px) skew(0deg);
+            transform: translateX(0px) skew(0deg);
+  }
+  5% {
+    -webkit-transform: translateX(5px) skew(30deg);
+            transform: translateX(5px) skew(30deg);
+  }
+  10% {
+    -webkit-transform: translateX(10px) skew(0deg);
+            transform: translateX(10px) skew(0deg);
+  }
+  15% {
+    -webkit-transform: translateX(5px) skew(30deg);
+            transform: translateX(5px) skew(30deg);
+  }
+  20% {
+    -webkit-transform: translateX(10px) skew(0deg);
+            transform: translateX(10px) skew(0deg);
+  }
+  25% {
+    -webkit-transform: translateX(5px) skew(30deg);
+            transform: translateX(5px) skew(30deg);
+  }
+  25% {
+    -webkit-transform: translateX(0px) skew(0deg);
+            transform: translateX(0px) skew(0deg);
+  }
+}
+</style>
+<script>
+  // Variables
+var toDo = [];
+var setItems;
+var shake = 0; // Empty Input Token
+var listName;
+
+// Get name and store in variable and set a localstorage session
+$("input#listName").on("keyup", function() {
+  listName = $(this).val();
+  localStorage.setItem("listName", listName); // Auto saves just incase the user forgets
+})
+
+// Store todo in variable on keyup
+$("#toDo").on("keyup", function() {
+  toDo = $(this).val();
+})
+
+// When enter key is pressed add item to list | Check for an empty input if true shake and skew the input box
+$("input#toDo").on("keypress", function(e) {
+  if (e.which == 13) {
+    if ($(this).val().length <= 0) {
+      shake = 1;
+      if (shake == 1) {
+        $(this).addClass("shake");
+        return false;
+      }
+    }
+    var toDoItem = $("<div class='toDo__list-item' data-value='0'>" + "<p>" + toDo + "</p>" + "<i id='delete' class='material-icons'>check_circle</i>");
+    setItems = setItems + ',' + toDo;
+    localStorage.setItem("set", setItems); // Auto saves just incase the user forgets
+    $(".toDo__content").append(toDoItem);
+    toDoItem.delay(100).animate({
+      'opacity': '1'
+    }, 100);
+    $(this).val(''); // Empty input field on submit
+    shake = 0;
+    if (shake == 0) {
+      $("input").removeClass("shake");
+    }
+  }
+})
+
+$(".toDo__content").on("click", "#delete", function() {
+  $(this).parent().remove();
+})
+
+// Save click handler
+$(".save").on("click", function() {
+  localStorage.setItem("set", setItems);
+  localStorage.setItem("listName", listName);
+})
+
+// Delete click handler
+$(".delete").on("click", function() {
+  localStorage.clear();
+  $(".toDo__list-item").remove();
+})
+
+// Load click handler
+$(".loadList").on("click", function() {
+  var listNameHeader = localStorage.getItem("listName");
+  $("input#listName").attr('value', listNameHeader);
+  var retrieve = localStorage.getItem("set").split(',');
+  for (i = 0; i < retrieve.length - 1; i++)
+    $(".toDo__content").append($("<div class='toDo__list-item' data-value='0' style='opacity: 1'>" + "<p>" + retrieve[i + 1] + "</p>" + "<i id='delete' class='material-icons'>check_circle</i>"));
+})
+
+
+
+
+
+
+
+
+// New Way To Delete Items -- Need To Find A way To Load Dynamically Added Content Into Dom After It Has Loaded
+
+// var strike = $(".toDo__list-item").attr("data-value");
+
+//$(".toDo__content").on("click", "#delete", function() {
+//  if(strike == 0) {
+//    strike = 1;
+//    $(this).parent().find('p').css({
+//      'text-decoration': 'line-through'
+//    });
+//  } else if(strike == 1) {
+//    strike = 0;
+//    $(this).parent().find('p').css({
+//      'text-decoration': 'none'
+//    });
+//  }
+//})
+</script>
